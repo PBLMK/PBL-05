@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dashboard PBL S5</title>
+<title>Dashboard Project Based Learning</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -36,7 +36,7 @@ body:has(#login:not([hidden])) .top{display:none}
 @keyframes spin{to{transform:rotate(360deg)}}
 .portal{position:relative;width:min(560px,100%);background:#fff;color:#1d2b3a;border-radius:6px;padding:36px 40px 28px;box-shadow:0 30px 70px rgba(30,0,3,.55)}
 .plogo{display:flex;align-items:center;justify-content:center;gap:10px}
-.plogo b{font:700 54px/1 "Barlow Semi Condensed",sans-serif;color:#243f86}.plogo i{font-style:normal;color:#f26b21}
+.plogo b{font:700 40px/1.05 "Barlow Semi Condensed",sans-serif;color:#243f86}.plogo i{font-style:normal;color:#f26b21}
 .ptitle{text-align:center;font:300 25px/1.25 Barlow,sans-serif;color:#5b6773;margin:22px 0 28px}
 .psub{text-align:center;font-size:13px;color:#8a95a1;margin:0 0 26px}
 .prow{display:grid;grid-template-columns:130px 1fr;align-items:center;gap:12px;margin-bottom:12px}
@@ -56,7 +56,7 @@ button.primary:hover{background:#143f7a}
 #app{display:none;min-height:100vh;background:linear-gradient(160deg,#0a1b38 0%,#0f3560 55%,#14507a 100%)}
 #login[hidden]~#app{display:block}
 .side{position:fixed;left:0;top:0;bottom:0;width:var(--side);background:rgba(6,18,40,.9);border-right:1px solid var(--line);padding:22px 0;z-index:15}
-.sbrand{padding:0 22px 22px;font:700 24px "Barlow Condensed",sans-serif;letter-spacing:.02em}
+.sbrand{padding:0 22px 22px;font:700 24px/1.1 "Barlow Condensed",sans-serif;letter-spacing:.02em}
 .sbrand small{display:block;font:500 11px "IBM Plex Sans",sans-serif;color:var(--red);background:#fff;width:max-content;padding:1px 7px;border-radius:3px;margin-top:4px;letter-spacing:0}
 .side a{display:flex;gap:12px;align-items:center;padding:12px 22px;color:var(--mute);text-decoration:none;font-size:14px;border-left:3px solid transparent}
 .side a:hover{color:#fff;background:rgba(79,227,193,.08);border-left-color:var(--teal)}
@@ -71,11 +71,11 @@ button.primary:hover{background:#143f7a}
 .gearbig{position:absolute;right:-90px;bottom:-90px;width:430px;opacity:.15}
 .cue{position:absolute;bottom:26px;left:6vw;color:var(--mute);font-size:13px}
 
-main{padding:56px clamp(16px,4vw,48px) 40px;display:grid;gap:18px;grid-template-columns:repeat(12,1fr);max-width:1240px}
+main{padding:56px clamp(16px,4vw,48px) 40px;display:grid;gap:18px;grid-template-columns:repeat(12,1fr)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:4px;overflow:hidden;scroll-margin-top:76px}
 .card>h2{font:600 15px "IBM Plex Sans",sans-serif;padding:11px 18px;background:rgba(20,80,122,.45);border-bottom:1px solid var(--line);color:#cfe3f1}
 .in{padding:20px}
-#stCard{grid-column:1/9;grid-row:1}#progCard{grid-column:9/13;grid-row:1}
+#stCard{grid-column:1/10;grid-row:1}#progCard{grid-column:10/13;grid-row:1}
 #opCard{grid-column:1/8;grid-row:2}#permit{grid-column:8/13;grid-row:2/4}#logCard{grid-column:1/8;grid-row:3}
 .wide{grid-column:1/-1}
 .sub{color:var(--mute);font-size:14px}
@@ -87,7 +87,7 @@ main{padding:56px clamp(16px,4vw,48px) 40px;display:grid;gap:18px;grid-template-
 #stCard{position:relative}
 #stCard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--line)}
 #stCard[data-s=ON]::before{background:var(--teal)}#stCard[data-s=OFF]::before{background:var(--mute)}#stCard[data-s=FAULT]::before{background:var(--pink)}
-#state{font:700 clamp(80px,13vw,140px)/.9 "Barlow Condensed",sans-serif;margin:4px 0 8px;color:var(--mute)}
+#state{font:700 clamp(64px,8vw,100px)/.9 "Barlow Condensed",sans-serif;margin:4px 0 8px;color:var(--mute)}
 #state.ON{color:var(--teal)}#state.FAULT{color:var(--pink)}#state.OFF{color:#fff}
 .track{display:flex;margin:30px 0 2px;padding:0;list-style:none}
 .track li{flex:1;text-align:center;font-size:13px;color:var(--mute);position:relative;padding-top:28px}
@@ -96,6 +96,17 @@ main{padding:56px clamp(16px,4vw,48px) 40px;display:grid;gap:18px;grid-template-
 .track li:first-child::after{display:none}
 .track li.done::before{background:var(--navy2);border-color:var(--teal)}.track li.done::after{background:var(--teal)}
 .track li.now{color:#fff;font-weight:600}.track li.now::before{background:var(--teal);border-color:var(--teal);box-shadow:0 0 0 6px rgba(79,227,193,.22)}
+
+/* unit mesin */
+.units{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:26px}
+.unit{display:flex;gap:12px;align-items:center;padding:14px;border:1px solid var(--line);border-radius:4px;background:rgba(0,0,0,.25);border-left:5px solid #44677f}
+.unit svg{width:34px;height:34px;flex:none;stroke:var(--mute);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.unit b{display:block;font:600 16px "Barlow Condensed",sans-serif;letter-spacing:.02em}
+.unit span{font-size:13px;color:var(--mute)}
+.unit.ok{border-left-color:var(--teal);background:rgba(79,227,193,.12)}.unit.ok svg,.unit.ok span{color:var(--teal);stroke:var(--teal)}
+.unit.idle{border-left-color:var(--amber)}.unit.idle span{color:var(--amber)}
+.unit.bad{border-left-color:var(--pink);background:rgba(224,69,123,.14)}.unit.bad svg{stroke:var(--pink)}.unit.bad span{color:#ff9ab8}
+@media(max-width:700px){.units{grid-template-columns:1fr 1fr}}
 
 /* donat tahap */
 .prog{display:grid;place-items:center;padding:28px 20px}
@@ -169,7 +180,7 @@ ul.log time{color:var(--mute);font-variant-numeric:tabular-nums;flex:none}
   <div class="portal">
     <div class="plogo">
       <svg width="62" height="62" viewBox="0 0 64 64" fill="none" stroke="#243f86" stroke-width="5" aria-hidden="true"><circle cx="32" cy="32" r="22" stroke-dasharray="7 5.3" stroke-width="9"/><circle cx="32" cy="32" r="16"/><circle cx="32" cy="32" r="5" stroke="#f26b21"/></svg>
-      <b>PBL<i>S5</i></b>
+      <b>Project Based <i>Learning</i></b>
     </div>
     <h2 class="ptitle">Portal Proyek Sistem Kendali<br>Integrasi Mekatronika</h2>
     <div class="prow"><label for="user">Username</label>
@@ -184,7 +195,7 @@ ul.log time{color:var(--mute);font-variant-numeric:tabular-nums;flex:none}
 <!-- ================= DASHBOARD ================= -->
 <div id="app">
   <nav class="side" aria-label="Menu">
-    <div class="sbrand">PBL S5<small>Mekatronika</small></div>
+    <div class="sbrand">Project Based Learning<small>Mekatronika</small></div>
     <a href="#top"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Beranda</a>
     <a href="#stCard"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/></svg>Status mesin</a>
     <a href="#opCard"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>Deteksi operator</a>
@@ -210,6 +221,7 @@ ul.log time{color:var(--mute);font-variant-numeric:tabular-nums;flex:none}
           <div id="state">—</div>
           <div class="sub" id="stateTxt">Menunggu data dari ESP32</div>
           <ol class="track" id="track"></ol>
+          <div class="units" id="units"></div>
         </div>
       </section>
 
@@ -266,6 +278,14 @@ const HOST='a96602c2.ala.asia-southeast1.emqxsl.com';
 const URL_WSS='wss://'+HOST+':8084/mqtt';
 const T={en:'pbl/cmd/remote_enable',hb:'pbl/cmd/heartbeat',machine:'pbl/status/machine',step:'pbl/status/step',online:'pbl/status/online',alarm:'pbl/alarm',op:'pbl/cmd/operator_present'};
 const STEPS=['Masuk','Mesin 1','Mesin 2','Mesin 3','Keluar'];
+/* Unit mesin: s = nomor tahap (0=Masuk ... 4=Keluar) saat unit itu bekerja. Ubah sesuai alur alat Anda. */
+const UNITS=[
+ {n:'Arm robot',s:[0,4],i:'<path d="M5 20h9M9 20v-6l6-6M15 8l4 3"/><circle cx="9" cy="14" r="1.6"/><circle cx="15" cy="8" r="1.6"/>'},
+ {n:'Cartesian 1',s:[1],i:'<path d="M4 20V5M4 20h15M4 20l7-7"/><path d="M9 9h6v4H9z"/>'},
+ {n:'Cartesian 2',s:[2],i:'<path d="M4 20V5M4 20h15M4 20l7-7"/><path d="M9 9h6v4H9z"/>'},
+ {n:'Cartesian 3',s:[3],i:'<path d="M4 20V5M4 20h15M4 20l7-7"/><path d="M9 9h6v4H9z"/>'}
+];
+let mS='',cs=-1;
 const $=id=>document.getElementById(id);
 let c=null,hb=null,n=0,on=false,own=false,lastEn=null,lastHb=0,alarms=[],ctx=null,det=null,stream=null,loop=null,camOn=false,pos=0,lastSeen=0,present=null,remote={v:null,t:0},shown=null,opNow=null;
 
@@ -302,10 +322,10 @@ function onMsg(t,s){
   if(t===T.machine){
     const v=s.toUpperCase(),el=$('state');
     el.textContent=v;el.className=v;$('stCard').dataset.s=v;
-    $('stateTxt').textContent=v==='ON'?'Mesin berjalan':v==='OFF'?'Mesin berhenti':v==='FAULT'?'Mesin gangguan, cek log alarm':'Status tidak dikenal';
+    $('stateTxt').textContent=v==='ON'?'Mesin berjalan':v==='OFF'?'Mesin berhenti':v==='FAULT'?'Mesin gangguan, cek log alarm':'Status tidak dikenal';mS=v;upUnits();
   }else if(t===T.step){
     const i=parseInt(s,10);
-    [...$('track').children].forEach((li,k)=>{li.className=k<i?'done':k===i?'now':''});setProg(i);
+    [...$('track').children].forEach((li,k)=>{li.className=k<i?'done':k===i?'now':''});setProg(i);cs=i;upUnits();
   }else if(t===T.online){
     s.toLowerCase()==='online'?chip($('cEsp'),'ok','ESP32: online'):chip($('cEsp'),'bad','ESP32: offline');
   }else if(t===T.alarm){addAlarm(s)
@@ -420,6 +440,14 @@ function setProg(i){
   $('pcount').textContent=(ok?i+1:0)+'/'+STEPS.length;
   $('pname').textContent=ok?STEPS[i]:'Belum ada data';
 }
+function upUnits(){
+  $('units').innerHTML=UNITS.map(u=>{
+    const mine=u.s.includes(cs);let k,t;
+    if(mS==='ON'&&mine){k='ok';t='Aktif'}else{k='off';t='Tidak aktif'}
+    return '<div class="unit '+k+'"><svg viewBox="0 0 24 24" aria-hidden="true">'+u.i+'</svg><div><b>'+u.n+'</b><span>'+t+'</span></div></div>';
+  }).join('');
+}
+upUnits();
 $('track').innerHTML=STEPS.map(s=>'<li>'+s+'</li>').join('');
 $('btnIn').onclick=connect;
 $('pass').addEventListener('keydown',e=>{if(e.key==='Enter')connect()});

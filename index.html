@@ -305,7 +305,7 @@ const UNITS=[
  {id:'cartesian2',n:'Cartesian 2',s:[2],i:'<path d="M4 20V5M4 20h15M4 20l7-7"/><path d="M9 9h6v4H9z"/>'},
  {id:'cartesian3',n:'Cartesian 3',s:[3],i:'<path d="M4 20V5M4 20h15M4 20l7-7"/><path d="M9 9h6v4H9z"/>'}
 ];
-let mS='',cs=-1,espOn=null;const ST={};const PAKAI_PERKIRAAN=true;   // true = mesin yang belum melapor sendiri diperkirakan dari pbl/status/step (tahap) saat pbl/status/machine = ON, HANYA selama belum ada satu pun mesin yang melapor sendiri (agar mesin serentak tidak salah tebak); laporan asli mesin selalu diutamakan
+let mS='',cs=-1,espOn=null,sim=false;const ST={};const PAKAI_PERKIRAAN=true;   // true = mesin yang belum melapor sendiri diperkirakan dari pbl/status/step (tahap) saat pbl/status/machine = ON, HANYA selama belum ada satu pun mesin yang melapor sendiri (agar mesin serentak tidak salah tebak); laporan asli mesin selalu diutamakan
 let lastActive='';let wifi=null;   // ST[id] = {s:'ON'|'OFF'|'FAULT'|'OFFLINE', t:waktu}
 const $=id=>document.getElementById(id);
 let c=null,hb=null,n=0,on=false,own=false,lastEn=null,lastHb=0,alarms=[],ctx=null,det=null,stream=null,loop=null,camOn=false,pos=0,lastSeen=0,present=null,remote={v:null,t:0},shown=null,opNow=null;
@@ -347,14 +347,12 @@ function onMsg(t,s){
   const sm=t.match(/^pbl\/status\/([A-Za-z0-9_-]{1,32})$/);
   if(sm&&!RESERVED.includes(sm[1])&&UNITS.some(u=>u.id===canonId(sm[1]))){setUnit(sm[1],s);return}
   if(t===T.machine){
-    const v=s.toUpperCase(),el=$('state');
-    el.textContent=v;el.className=v;$('stCard').dataset.s=v;
-    $('stateTxt').textContent=v==='ON'?'Mesin berjalan':v==='OFF'?'Mesin berhenti':v==='FAULT'?'Mesin gangguan, cek log alarm':'Status tidak dikenal';mS=v;upUnits();refreshState();
+    mS=s.toUpperCase();upUnits();refreshState();
   }else if(t===T.step){
     const i=parseInt(s,10);
-    [...$('track').children].forEach((li,k)=>{li.className=k<i?'done':k===i?'now':''});setProg(i);cs=i;upUnits();
+    cs=Number.isInteger(i)?i:-1;renderStep();upUnits();
   }else if(t===T.online){
-    espOn=s.toLowerCase()==='online';chip($('cEsp'),espOn?'ok':'bad','ESP32: '+(espOn?'online':'offline'));upUnits();refreshState();renderWifi();
+    espOn=s.toLowerCase()==='online';chip($('cEsp'),espOn?'ok':'bad','ESP32: '+(espOn?'online':'offline'));renderStep();upUnits();refreshState();renderWifi();
   }else if(t===T.alarm){addAlarm(s)
   }else if(t===T.op||t==='pbl/status/operator'){remote={v:s==='1',t:Date.now()};showRemote()
   }else if(t===T.en){lastEn=s;if(s==='0')stopHb();sync()
@@ -481,7 +479,12 @@ const ALIAS={arm:['arm','armrobot','robotarm','robot','lengan'],
   cartesian2:['cartesian2','kartesian2','cart2','k2','mesin2','m2'],
   cartesian3:['cartesian3','kartesian3','cart3','k3','mesin3','m3']};
 const RESERVED=['machine','step','online','operator','wifi','units','unit'];
-const ESP_GATE=true;   // true = bila ESP32 offline, status mesin dianggap "tidak diketahui" (data retained bisa sudah basi)
+const ESP_GATE=true;   // true = indikator (status, tahap, mesin menyala) baru aktif setelah ESP32 terdeteksi online; data retained lama di broker diabaikan
+function detected(){return !ESP_GATE||sim||espOn===true}
+function renderStep(){
+  const i=detected()?cs:-1;
+  [...$('track').children].forEach((li,k)=>{li.className=i<0?'':k<i?'done':k===i?'now':''});setProg(i);
+}
 const STALE_MS=0;      // >0 = mesin ditandai "Tidak merespons" bila tak ada update sekian ms (mis. 10000 jika ESP32 mengirim status berkala)
 function canonId(id){const k=String(id).toLowerCase().replace(/[^a-z0-9]/g,'');for(const c in ALIAS)if(ALIAS[c].includes(k))return c;return id}
 function pretty(id){return id.replace(/[_-]+/g,' ').replace(/(\d+)/,' $1').replace(/\s+/g,' ').trim().replace(/^./,x=>x.toUpperCase())}
@@ -512,7 +515,7 @@ function setUnitsJson(s){          // pbl/status/units = {"arm":"ON","cartesian1
 }
 function effState(id){
   const r=ST[id];if(!r)return null;
-  if(ESP_GATE&&espOn===false)return 'UNKNOWN';
+  if(!detected())return 'UNKNOWN';
   if(STALE_MS&&Date.now()-r.t>STALE_MS)return 'STALE';
   return r.s;
 }
@@ -522,9 +525,9 @@ function unitView(u){
   if(e==='FAULT')return{k:'bad',t:'Gangguan'};
   if(e==='OFF')return{k:'idle',t:'Berhenti'};
   if(e==='OFFLINE')return{k:'off',t:'Offline'};
-  if(e==='UNKNOWN')return{k:'off',t:'ESP32 offline'};
+  if(e==='UNKNOWN')return{k:'off',t:espOn===false?'ESP32 offline':'Menunggu ESP32'};
   if(e==='STALE')return{k:'off',t:'Tidak merespons'};
-  if(PAKAI_PERKIRAAN&&!Object.keys(ST).length&&mS&&u.s.length)return(mS==='ON'&&u.s.includes(cs))?{k:'ok est',t:'Menyala (dari tahap)'}:{k:'off',t:mS==='ON'?'Tidak aktif':'Berhenti'};
+  if(PAKAI_PERKIRAAN&&detected()&&!Object.keys(ST).length&&mS&&u.s.length)return(mS==='ON'&&u.s.includes(cs))?{k:'ok est',t:'Menyala (dari tahap)'}:{k:'off',t:mS==='ON'?'Tidak aktif':'Berhenti'};
   return{k:'off',t:'Belum melapor'};
 }
 function upUnits(){
@@ -546,13 +549,17 @@ function updActive(){
 }
 function refreshState(){
   const el=$('state');
-  if(ESP_GATE&&espOn===false){el.textContent='—';el.className='';$('stCard').dataset.s='';
-    $('stateTxt').textContent='ESP32 offline: status mesin tidak diketahui';return}
-  const ids=Object.keys(ST);if(!ids.length)return;
-  const nOn=ids.filter(i=>effState(i)==='ON').length,nF=ids.filter(i=>effState(i)==='FAULT').length,total=unitList().length;
-  const v=nF?'FAULT':nOn?'ON':'OFF';
-  el.textContent=v;el.className=v;$('stCard').dataset.s=v;
-  $('stateTxt').textContent=nF?nF+' mesin gangguan, cek log alarm':nOn?nOn+' dari '+total+' mesin menyala':'Tidak ada mesin yang menyala';
+  const idle=t=>{el.textContent='—';el.className='';$('stCard').dataset.s='';$('stateTxt').textContent=t};
+  if(!detected()){idle(espOn===false?'ESP32 offline: status mesin tidak diketahui':'Menunggu ESP32 terdeteksi');return}
+  const ids=Object.keys(ST);let v,txt;
+  if(ids.length){
+    const nOn=ids.filter(i=>effState(i)==='ON').length,nF=ids.filter(i=>effState(i)==='FAULT').length,total=unitList().length;
+    v=nF?'FAULT':nOn?'ON':'OFF';
+    txt=nF?nF+' mesin gangguan, cek log alarm':nOn?nOn+' dari '+total+' mesin menyala':'Tidak ada mesin yang menyala';
+  }else if(mS==='ON'||mS==='OFF'||mS==='FAULT'){
+    v=mS;txt=v==='ON'?'Mesin berjalan':v==='OFF'?'Mesin berhenti':'Mesin gangguan, cek log alarm';
+  }else{idle('Menunggu data dari ESP32');return}
+  el.textContent=v;el.className=v;$('stCard').dataset.s=v;$('stateTxt').textContent=txt;
 }
 /* ===== WiFi ESP32 (dilaporkan ESP32 ke pbl/status/wifi) ===== */
 function setWifi(s){
@@ -579,14 +586,15 @@ function renderWifi(){
 function drawSim(){
   const b=$('simBtns');b.innerHTML='';
   UNITS.forEach(u=>{const x=document.createElement('button');x.textContent=u.n;x.className=ST[u.id]&&ST[u.id].s==='ON'?'on':'';
-    x.onclick=()=>{setUnit(u.id,ST[u.id]&&ST[u.id].s==='ON'?'OFF':'ON');drawSim()};b.append(x)});
-  const a=document.createElement('button');a.textContent='Semua ON';a.onclick=()=>{UNITS.forEach(u=>setUnit(u.id,'ON'));drawSim()};b.append(a);
-  const r=document.createElement('button');r.textContent='Reset';r.onclick=()=>{Object.keys(ST).forEach(k=>delete ST[k]);lastActive='';upUnits();drawSim()};b.append(r);
+    x.onclick=()=>{sim=true;renderStep();setUnit(u.id,ST[u.id]&&ST[u.id].s==='ON'?'OFF':'ON');drawSim()};b.append(x)});
+  const a=document.createElement('button');a.textContent='Semua ON';a.onclick=()=>{sim=true;renderStep();UNITS.forEach(u=>setUnit(u.id,'ON'));drawSim()};b.append(a);
+  const r=document.createElement('button');r.textContent='Reset';r.onclick=()=>{sim=false;Object.keys(ST).forEach(k=>delete ST[k]);lastActive='';renderStep();upUnits();refreshState();drawSim()};b.append(r);
 }
 drawSim();
 if(STALE_MS)setInterval(()=>{upUnits();refreshState()},2000);
 upUnits();
 $('track').innerHTML=STEPS.map(s=>'<li>'+s+'</li>').join('');
+renderStep();refreshState();
 $('btnIn').onclick=connect;
 $('pass').addEventListener('keydown',e=>{if(e.key==='Enter')connect()});
 $('btnOut').onclick=()=>{if(c&&c.connected&&own)c.publish(T.en,'0',{qos:1});forceOff();if(c)c.end();

@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--red:#b3121d;--red-d:#6e0912;--navy:#0c2340;--navy2:#14507a;--teal:#4fe3c1;--pink:#e0457b;--amber:#ffc247;--ink:#e8f1f8;--mute:#8fb0c8;--card:rgba(10,30,58,.72);--line:rgba(120,180,220,.22);--side:210px}
+:root{--red:#0D47A1;--red-d:#06275c;--red-l:#2f6fcf;--bolt:#0D47A1;--navy:#07263f;--navy2:#1591DC;--teal:#4BB8FA;--pink:#e0457b;--amber:#ffc247;--ink:#e8f1f8;--mute:#8fb0c8;--card:rgba(7,30,52,.72);--line:rgba(120,180,220,.22);--side:210px}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;color:var(--ink);background:var(--navy);font:15px/1.5 "IBM Plex Sans",system-ui,"Segoe UI",Arial,sans-serif}
@@ -20,32 +20,32 @@ button{font:inherit;cursor:pointer;border-radius:6px;border:1px solid var(--line
 /* ---------- bar atas (chip koneksi) ---------- */
 .top{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:flex-end;padding:12px clamp(14px,3vw,32px);pointer-events:none}
 .top .chips{pointer-events:auto}
-body:has(#login[hidden]) .top{left:var(--side);background:rgba(6,18,40,.85);border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+body:has(#login[hidden]) .top{left:var(--side);background:rgba(5,24,44,.85);border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.chip{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border-radius:99px;background:rgba(6,18,40,.82);border:1px solid var(--line);font-size:13px;color:#dfe9ef}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border-radius:99px;background:rgba(5,24,44,.82);border:1px solid var(--line);font-size:13px;color:#dfe9ef}
 .dot{width:9px;height:9px;border-radius:50%;background:#7f94a4}
-.ok .dot{background:var(--teal);box-shadow:0 0 0 3px rgba(79,227,193,.25)}.bad .dot{background:#ff6b8b}.wait .dot{background:var(--amber)}
+.ok .dot{background:var(--teal);box-shadow:0 0 0 3px rgba(75,184,250,.25)}.bad .dot{background:#ff6b8b}.wait .dot{background:var(--amber)}
 .top button{padding:4px 12px;font-size:13px}
 
 body:has(#login:not([hidden])) .top{display:none}
 /* ---------- LOGIN ---------- */
 #login{min-height:100vh;display:grid;place-items:center;padding:24px;font-family:Barlow,system-ui,sans-serif;position:relative;overflow:hidden;
-  background:radial-gradient(ellipse at 50% 30%,#c4161f 0%,var(--red) 40%,var(--red-d) 100%)}
+  background:radial-gradient(ellipse at 50% 30%,var(--red-l) 0%,var(--red) 40%,var(--red-d) 100%)}
 #login .bg{position:absolute;inset:0;width:100%;height:100%;opacity:.55}
 .gear{transform-origin:center;transform-box:fill-box;animation:spin 70s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.portal{position:relative;width:min(560px,100%);background:#fff;color:#1d2b3a;border-radius:6px;padding:36px 40px 28px;box-shadow:0 30px 70px rgba(30,0,3,.55)}
+.portal{position:relative;width:min(560px,100%);background:#fff;color:#1d2b3a;border-radius:6px;padding:36px 40px 28px;box-shadow:0 30px 70px rgba(3,18,48,.5)}
 .plogo{display:flex;align-items:center;justify-content:center;gap:10px}
-.plogo b{font:700 40px/1.05 "Barlow Semi Condensed",sans-serif;color:#243f86}.plogo i{font-style:normal;color:#f26b21}
+.plogo b{font:700 40px/1.05 "Barlow Semi Condensed",sans-serif;color:#0a3a85}.plogo i{font-style:normal;color:var(--bolt)}
 .ptitle{text-align:center;font:300 25px/1.25 Barlow,sans-serif;color:#5b6773;margin:22px 0 28px}
 .psub{text-align:center;font-size:13px;color:#8a95a1;margin:0 0 26px}
 .prow{display:grid;grid-template-columns:130px 1fr;align-items:center;gap:12px;margin-bottom:12px}
 .prow label{text-align:right;font-weight:600;font-size:13px;color:#4b5663}
 .prow input{width:100%;padding:8px 10px;border:1px solid #c9d1d9;border-radius:4px;font:inherit;background:#fff;color:#1d2b3a}
-.prow input:focus{border-color:#4a90e2;box-shadow:0 0 0 3px rgba(74,144,226,.25);outline:0}
+.prow input:focus{border-color:var(--bolt);box-shadow:0 0 0 3px rgba(13,71,161,.28);outline:0}
 .pbtn{padding-left:142px;margin-top:6px}
-button.primary{background:#0d2d5a;border:0;color:#fff;border-radius:4px;padding:9px 20px;font-weight:500}
-button.primary:hover{background:#143f7a}
+button.primary{background:var(--bolt);border:0;color:#fff;border-radius:4px;padding:9px 20px;font-weight:500}
+button.primary:hover{background:#0a3a85}
 .err{color:#b3121d;font-size:14px;min-height:20px;margin:8px 0 0 142px}
 .tags{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:22px;padding-top:18px;border-top:1px solid #e4e8ec}
 .tags span{font-size:12px;border:1px solid #d6dce2;border-radius:99px;padding:3px 10px;color:#55616d}
@@ -53,30 +53,34 @@ button.primary:hover{background:#143f7a}
 @media(max-width:520px){.portal{padding:26px 20px}.prow{grid-template-columns:1fr}.prow label{text-align:left}.pbtn,.err{padding-left:0;margin-left:0}}
 
 /* ---------- DASHBOARD ---------- */
-#app{display:none;min-height:100vh;background:linear-gradient(160deg,#0a1b38 0%,#0f3560 55%,#14507a 100%)}
+#app{display:none;min-height:100vh;background:linear-gradient(160deg,#07263f 0%,#0d5a92 60%,#1591DC 100%)}
 #login[hidden]~#app{display:block}
-.side{position:fixed;left:0;top:0;bottom:0;width:var(--side);background:rgba(6,18,40,.9);border-right:1px solid var(--line);padding:22px 0;z-index:15}
+.side{position:fixed;left:0;top:0;bottom:0;width:var(--side);background:rgba(5,24,44,.9);border-right:1px solid var(--line);padding:22px 0;z-index:15}
 .sbrand{padding:0 22px 22px;font:700 24px/1.1 "Barlow Condensed",sans-serif;letter-spacing:.02em}
-.sbrand small{display:block;font:500 11px "IBM Plex Sans",sans-serif;color:var(--red);background:#fff;width:max-content;padding:1px 7px;border-radius:3px;margin-top:4px;letter-spacing:0}
+.sbrand small{display:block;font:500 11px "IBM Plex Sans",sans-serif;color:var(--navy2);background:#fff;width:max-content;padding:1px 7px;border-radius:3px;margin-top:4px;letter-spacing:0}
 .side a{display:flex;gap:12px;align-items:center;padding:12px 22px;color:var(--mute);text-decoration:none;font-size:14px;border-left:3px solid transparent}
-.side a:hover{color:#fff;background:rgba(79,227,193,.08);border-left-color:var(--teal)}
+.side a:hover{color:#fff;background:rgba(75,184,250,.08);border-left-color:var(--teal)}
 .side svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.6;flex:none}
 .wrap{margin-left:var(--side)}
 
-.hero{min-height:100vh;display:grid;align-content:center;padding:80px 6vw 60px;position:relative;overflow:hidden;background:radial-gradient(circle at 80% 30%,rgba(179,18,29,.45),transparent 55%)}
+.hero{min-height:100vh;display:grid;align-content:center;padding:80px 6vw 60px;position:relative;overflow:hidden;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 80% 30%,rgba(75,184,250,.30),transparent 60%);-webkit-mask-image:linear-gradient(to bottom,#000 35%,transparent 100%);mask-image:linear-gradient(to bottom,#000 35%,transparent 100%)}
 .hero .code{color:var(--teal);font:600 18px "Barlow Condensed",sans-serif;letter-spacing:.06em;margin-bottom:14px}
 .hero h1{font:700 clamp(40px,6.2vw,86px)/1 "Barlow Condensed",sans-serif;max-width:13ch;letter-spacing:.005em}
 .hero p{margin:24px 0 0;color:var(--mute);font-size:17px;line-height:1.7}
 .hero p b{color:#fff;font-weight:500}
-.gearbig{position:absolute;right:-90px;bottom:-90px;width:430px;opacity:.15}
+.gearbig{position:absolute;right:-90px;bottom:-90px;width:430px;opacity:.15;-webkit-mask-image:linear-gradient(to bottom,#000 0%,transparent 75%);mask-image:linear-gradient(to bottom,#000 0%,transparent 75%)}
 .cue{position:absolute;bottom:26px;left:6vw;color:var(--mute);font-size:13px}
 
 main{padding:56px clamp(16px,4vw,48px) 40px;display:grid;gap:18px;grid-template-columns:repeat(12,1fr)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:4px;overflow:hidden;scroll-margin-top:76px}
-.card>h2{font:600 15px "IBM Plex Sans",sans-serif;padding:11px 18px;background:rgba(20,80,122,.45);border-bottom:1px solid var(--line);color:#cfe3f1}
+.card>h2{font:600 15px "IBM Plex Sans",sans-serif;padding:11px 18px;background:rgba(21,145,220,.30);border-bottom:1px solid var(--line);color:#cfe3f1}
 .in{padding:20px}
 #stCard{grid-column:1/10;grid-row:1}#progCard{grid-column:10/13;grid-row:1}
 #opCard{grid-column:1/7;grid-row:2}#permit{grid-column:7/13;grid-row:2}#logCard{grid-column:1/-1;grid-row:3}
+main{position:relative}
+main::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='520' viewBox='0 0 520 520'%3E%3Cg fill='none' stroke='%23fff' stroke-opacity='.17' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpolyline points='0,130 110,130 150,90 300,90 340,130 520,130'/%3E%3Cpolyline points='0,400 90,400 130,440 260,440 300,400 520,400'/%3E%3Cpolyline points='420,0 420,60 460,100 460,200 420,240 420,520'/%3E%3Cpolyline points='60,170 60,240'/%3E%3Cpolyline points='230,230 230,300 270,340 270,400'/%3E%3Cpath d='M0 490 q32.5 -36 65 0 t65 0 t65 0 t65 0 t65 0 t65 0 t65 0 t65 0' stroke-opacity='.13'/%3E%3Cg transform='translate(150 350)'%3E%3Cpolyline points='0,0 12,0 18,-9 30,9 42,-9 54,9 66,-9 72,0 84,0'/%3E%3C/g%3E%3Cg transform='translate(330 300)'%3E%3Cline x1='0' y1='0' x2='26' y2='0'/%3E%3Cline x1='26' y1='-16' x2='26' y2='16'/%3E%3Cline x1='36' y1='-16' x2='36' y2='16'/%3E%3Cline x1='36' y1='0' x2='62' y2='0'/%3E%3C/g%3E%3Cg transform='translate(120 40)'%3E%3Crect x='0' y='0' width='64' height='44' rx='4'/%3E%3Cpath d='M12 -10v10M26 -10v10M40 -10v10M54 -10v10M12 44v10M26 44v10M40 44v10M54 44v10'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/g%3E%3Cg transform='translate(350 40)'%3E%3Ccircle cx='0' cy='0' r='20'/%3E%3Ccircle cx='0' cy='0' r='6'/%3E%3Crect x='20' y='-4' width='22' height='8' rx='2'/%3E%3C/g%3E%3Cg transform='translate(18 330)'%3E%3Cline x1='0' y1='0' x2='0' y2='18'/%3E%3Cline x1='-16' y1='18' x2='16' y2='18'/%3E%3Cline x1='-10' y1='25' x2='10' y2='25'/%3E%3Cline x1='-4' y1='32' x2='4' y2='32'/%3E%3C/g%3E%3Cg transform='translate(110 190)'%3E%3Crect x='0' y='0' width='90' height='10' rx='3'/%3E%3Crect x='30' y='-14' width='26' height='38' rx='4'/%3E%3C/g%3E%3C/g%3E%3Cg fill='none' stroke='%23fff' stroke-opacity='.15'%3E%3Ccircle cx='80' cy='290' r='34' stroke-width='9' stroke-dasharray='10.68 10.68'/%3E%3Ccircle cx='80' cy='290' r='25' stroke-width='2'/%3E%3Ccircle cx='80' cy='290' r='7' stroke-width='2'/%3E%3Ccircle cx='400' cy='350' r='24' stroke-width='7' stroke-dasharray='7.54 7.54'/%3E%3Ccircle cx='400' cy='350' r='17' stroke-width='2'/%3E%3Ccircle cx='250' cy='470' r='20' stroke-width='6' stroke-dasharray='6.28 6.28'/%3E%3Ccircle cx='250' cy='470' r='13' stroke-width='2'/%3E%3C/g%3E%3Cg fill='%23fff' fill-opacity='.13'%3E%3Cpolygon transform='translate(300 200) scale(3.2) rotate(10 12 12)' points='13 2 3 14 12 14 11 22 21 10 12 10'/%3E%3Cpolygon transform='translate(20 40) scale(2.2)' points='13 2 3 14 12 14 11 22 21 10 12 10'/%3E%3Cpolygon transform='translate(460 430) scale(2.6) rotate(-12 12 12)' points='13 2 3 14 12 14 11 22 21 10 12 10'/%3E%3C/g%3E%3Cg fill='none' stroke='%23fff' stroke-opacity='.2' stroke-width='2' stroke-linejoin='round'%3E%3Cpolygon transform='translate(190 400) scale(2.4)' points='13 2 3 14 12 14 11 22 21 10 12 10'/%3E%3C/g%3E%3Cg fill='%23fff' fill-opacity='.35'%3E%3Ccircle cx='150' cy='90' r='4'/%3E%3Ccircle cx='300' cy='90' r='4'/%3E%3Ccircle cx='130' cy='440' r='4'/%3E%3Ccircle cx='260' cy='440' r='4'/%3E%3Ccircle cx='460' cy='100' r='4'/%3E%3Ccircle cx='460' cy='200' r='4'/%3E%3Ccircle cx='60' cy='170' r='3'/%3E%3Ccircle cx='60' cy='240' r='3'/%3E%3C/g%3E%3C/svg%3E") 0 0/520px 520px repeat;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 140px);mask-image:linear-gradient(to bottom,transparent 0,#000 140px)}
+main>.card,main>#last{position:relative;z-index:1}
 #opCard .in{height:calc(100% - 41px);display:flex;flex-direction:column}
 #opCard .op{flex:1;min-height:170px;padding:28px}
 #opCard .op strong{font-size:24px}
@@ -96,11 +100,11 @@ main{padding:56px clamp(16px,4vw,48px) 40px;display:grid;gap:18px;grid-template-
 #state.ON{color:var(--teal)}#state.FAULT{color:var(--pink)}#state.OFF{color:#fff}
 .track{display:flex;margin:30px 0 2px;padding:0;list-style:none}
 .track li{flex:1;text-align:center;font-size:13px;color:var(--mute);position:relative;padding-top:28px}
-.track li::before{content:"";position:absolute;top:2px;left:50%;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:#12304f;border:2px solid #44677f;z-index:1}
+.track li::before{content:"";position:absolute;top:2px;left:50%;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:#0d3a5f;border:2px solid #44677f;z-index:1}
 .track li::after{content:"";position:absolute;top:9px;left:-50%;width:100%;height:4px;background:var(--line)}
 .track li:first-child::after{display:none}
 .track li.done::before{background:var(--navy2);border-color:var(--teal)}.track li.done::after{background:var(--teal)}
-.track li.now{color:#fff;font-weight:600}.track li.now::before{background:var(--teal);border-color:var(--teal);box-shadow:0 0 0 6px rgba(79,227,193,.22)}
+.track li.now{color:#fff;font-weight:600}.track li.now::before{background:var(--teal);border-color:var(--teal);box-shadow:0 0 0 6px rgba(75,184,250,.22)}
 
 /* unit mesin */
 .units{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:12px}
@@ -108,15 +112,15 @@ main{padding:56px clamp(16px,4vw,48px) 40px;display:grid;gap:18px;grid-template-
 .unit svg{width:34px;height:34px;flex:none;stroke:var(--mute);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .unit b{display:block;font:600 16px "Barlow Condensed",sans-serif;letter-spacing:.02em}
 .unit span{font-size:13px;color:var(--mute)}.unit .ts{display:block;font-size:11px;opacity:.75}.unit.off{opacity:.8}
-.unit.ok{border-left-color:var(--teal);background:rgba(79,227,193,.12)}.unit.ok svg,.unit.ok span{color:var(--teal);stroke:var(--teal)}
+.unit.ok{border-left-color:var(--teal);background:rgba(75,184,250,.12)}.unit.ok svg,.unit.ok span{color:var(--teal);stroke:var(--teal)}
 .unit.idle{border-left-color:var(--amber)}.unit.idle span{color:var(--amber)}
 .unit.bad{border-left-color:var(--pink);background:rgba(224,69,123,.14)}.unit.bad svg{stroke:var(--pink)}.unit.bad span{color:#ff9ab8}
 .unit.ok.est{border-left-style:dashed}
-.simrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.simrow button{padding:5px 12px;font-size:13px}.simrow button.on{background:rgba(79,227,193,.2);border-color:var(--teal)}
+.simrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.simrow button{padding:5px 12px;font-size:13px}.simrow button.on{background:rgba(75,184,250,.2);border-color:var(--teal)}
 .active{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px}
 .active[hidden]{display:none}
 .active .lbl{font-size:13px;color:var(--mute)}
-.pill{padding:4px 14px;border-radius:99px;background:rgba(79,227,193,.18);border:1px solid var(--teal);color:var(--teal);font:600 16px "Barlow Condensed",sans-serif;letter-spacing:.03em}
+.pill{padding:4px 14px;border-radius:99px;background:rgba(75,184,250,.18);border:1px solid var(--teal);color:var(--teal);font:600 16px "Barlow Condensed",sans-serif;letter-spacing:.03em}
 .pill.est{border-style:dashed}
 @media(max-width:700px){.units{grid-template-columns:1fr 1fr}}
 
@@ -134,7 +138,7 @@ main{padding:56px clamp(16px,4vw,48px) 40px;display:grid;gap:18px;grid-template-
   box-shadow:0 10px 0 color-mix(in srgb,var(--c) 55%,#000),0 0 0 12px var(--cs),0 22px 28px -8px rgba(0,0,0,.45);
   transition:transform .08s,box-shadow .08s,background .2s}
 .press:active:not(:disabled){transform:translateY(8px);box-shadow:0 2px 0 color-mix(in srgb,var(--c) 55%,#000),0 0 0 12px var(--cs),0 6px 10px -4px rgba(0,0,0,.4)}
-.press.on{--c:#19a974;--cs:rgba(79,227,193,.25)}
+.press.on{--c:#1591DC;--cs:rgba(75,184,250,.28)}
 .press:disabled{--c:#6c8091;--cs:transparent;cursor:not-allowed;opacity:.6}
 .press b{display:block;font:700 44px/1 "Barlow Condensed",sans-serif;letter-spacing:.05em}
 .press small{display:block;font-size:12px;opacity:.92;margin-top:4px}
@@ -146,7 +150,7 @@ main{padding:56px clamp(16px,4vw,48px) 40px;display:grid;gap:18px;grid-template-
 .op{display:flex;gap:14px;align-items:center;padding:18px;border-radius:4px;border:1px solid var(--line);background:rgba(0,0,0,.25)}
 .opdot{width:18px;height:18px;border-radius:50%;background:#7f94a4;flex:none}
 .op strong{font-size:17px;display:block}
-.op.yes{border-color:var(--teal);background:rgba(79,227,193,.12)}.op.yes .opdot{background:var(--teal);box-shadow:0 0 0 6px rgba(79,227,193,.2)}
+.op.yes{border-color:var(--teal);background:rgba(75,184,250,.12)}.op.yes .opdot{background:var(--teal);box-shadow:0 0 0 6px rgba(75,184,250,.2)}
 .op.no{border-color:var(--pink);background:rgba(224,69,123,.14)}.op.no .opdot{background:var(--pink)}
 .op.wait .opdot{background:var(--amber)}
 #vidWrap video{width:100%;max-height:220px;object-fit:cover;border-radius:4px;transform:scaleX(-1);background:#000;margin-top:12px}
@@ -187,12 +191,17 @@ ul.log time{color:var(--mute);font-variant-numeric:tabular-nums;flex:none}
       <polyline points="0,120 140,120 190,170 300,170"/><polyline points="1200,640 1040,640 990,690 860,690"/>
     </g>
     <g fill="#fff" fill-opacity=".45"><circle cx="420" cy="590" r="6"/><circle cx="360" cy="750" r="6"/><circle cx="800" cy="210" r="6"/><circle cx="900" cy="280" r="6"/><circle cx="300" cy="170" r="6"/><circle cx="860" cy="690" r="6"/></g>
-    <g class="gear" fill="none" stroke="#fff" stroke-opacity=".22"><circle cx="150" cy="150" r="130" stroke-width="30" stroke-dasharray="22 22"/><circle cx="150" cy="150" r="108" stroke-width="6"/><circle cx="150" cy="150" r="30" stroke-width="6"/></g>
+      <path d="M0 470 q50 -70 100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="2.5"/>
+    <path d="M0 510 q50 -40 100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0" fill="none" stroke="#fff" stroke-opacity=".12" stroke-width="2"/>
+    <g fill="#fff" fill-opacity=".16"><polygon transform="translate(930 60) scale(10) rotate(8 12 12)" points="13 2 3 14 12 14 11 22 21 10 12 10"/><polygon transform="translate(70 560) scale(7) rotate(-10 12 12)" points="13 2 3 14 12 14 11 22 21 10 12 10"/><polygon transform="translate(1010 330) scale(4.5)" points="13 2 3 14 12 14 11 22 21 10 12 10"/></g>
+    <g fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="2.5" stroke-linejoin="round"><polygon transform="translate(300 80) scale(5)" points="13 2 3 14 12 14 11 22 21 10 12 10"/><polygon transform="translate(760 590) scale(6) rotate(12 12 12)" points="13 2 3 14 12 14 11 22 21 10 12 10"/></g>
+    <g fill="#fff" fill-opacity=".5"><circle cx="1030" cy="160" r="4"/><circle cx="120" cy="470" r="4"/><circle cx="640" cy="60" r="3"/><circle cx="560" cy="740" r="3"/></g>
+  <g class="gear" fill="none" stroke="#fff" stroke-opacity=".22"><circle cx="150" cy="150" r="130" stroke-width="30" stroke-dasharray="22 22"/><circle cx="150" cy="150" r="108" stroke-width="6"/><circle cx="150" cy="150" r="30" stroke-width="6"/></g>
     <g class="gear" fill="none" stroke="#fff" stroke-opacity=".2"><circle cx="1060" cy="660" r="190" stroke-width="36" stroke-dasharray="30 30"/><circle cx="1060" cy="660" r="160" stroke-width="7"/><circle cx="1060" cy="660" r="40" stroke-width="7"/></g>
   </svg>
   <div class="portal">
     <div class="plogo">
-      <svg width="62" height="62" viewBox="0 0 64 64" fill="none" stroke="#243f86" stroke-width="5" aria-hidden="true"><circle cx="32" cy="32" r="22" stroke-dasharray="7 5.3" stroke-width="9"/><circle cx="32" cy="32" r="16"/><circle cx="32" cy="32" r="5" stroke="#f26b21"/></svg>
+      <svg width="62" height="62" viewBox="0 0 64 64" fill="none" stroke="#0a3a85" stroke-width="5" aria-hidden="true"><circle cx="32" cy="32" r="22" stroke-dasharray="7 5.3" stroke-width="9"/><circle cx="32" cy="32" r="16"/><polygon points="35 19 24 34 31 34 29 46 40 30 33 30" fill="#0D47A1" stroke="none"/></svg>
       <b>Project Based <i>Learning</i></b>
     </div>
     <h2 class="ptitle">Portal Proyek Sistem Kendali<br>Integrasi Mekatronika</h2>
@@ -246,7 +255,7 @@ ul.log time{color:var(--mute);font-variant-numeric:tabular-nums;flex:none}
         <h2>Tahap proses</h2>
         <div class="in prog">
           <div class="donut">
-            <svg viewBox="0 0 120 120" width="170" height="170" aria-hidden="true"><circle cx="60" cy="60" r="50" fill="none" stroke="#12304f" stroke-width="14"/><circle id="parc" cx="60" cy="60" r="50" fill="none" stroke="#4fe3c1" stroke-width="14" stroke-dasharray="0 314.2"/></svg>
+            <svg viewBox="0 0 120 120" width="170" height="170" aria-hidden="true"><circle cx="60" cy="60" r="50" fill="none" stroke="#0d3a5f" stroke-width="14"/><circle id="parc" cx="60" cy="60" r="50" fill="none" stroke="#4BB8FA" stroke-width="14" stroke-dasharray="0 314.2"/></svg>
             <div><b id="pcount">0/5</b><span id="pname">Belum ada data</span></div>
           </div>
         </div>
